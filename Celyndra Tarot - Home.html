@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Celyndra Tarot – Home</title>
+
+<!-- FONT: Vollkorn Italic -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@1,400;1,600&display=swap');
+
+body {
+    background: white;
+    font-family: "Vollkorn", serif;
+    font-style: italic;
+    margin: 0;
+    padding: 0;
+    line-height: 1.55;
+    color: #3A345B;
+}
+
+.header-foto {
+    position: relative;
+    width: 100%;
+    height: 60vh;         /* tinggi header = 60% viewport */
+    overflow: hidden;
+}
+
+.header-foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;    /* gambar selalu memenuhi area header */
+    object-position: center;
+    display: block;
+}
+
+/* MAIN WRAPPER */
+.home-wrapper {
+    width: 90%;
+    margin: 40px auto;
+    text-align: left;
+}
+
+.section-title {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* DAILY TAROT FLIP CARD */
+.card-row {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.card-container {
+    width: 220px;
+    height: 312px;
+    perspective: 1000px;
+}
+
+.card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+}
+
+.card.flip {
+    transform: rotateY(180deg);
+    cursor: default;
+}
+
+.side {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.front img, 
+.back img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.back {
+    transform: rotateY(180deg);
+}
+
+.btn-explanation,
+.btn-hide {
+    padding: 12px 20px;
+    background: #F3C8DD;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #3A345B;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.btn-explanation:hover,
+.btn-hide:hover {
+    opacity: 0.85;
+}
+
+.explanation-text {
+    font-size: 16px;
+    color: #3A345B;
+    display: none;
+    max-width: 300px;
+    line-height: 1.5;
+}
+
+/* -------------------- */
+/*   ABOUT SECTION NEW  */
+/* -------------------- */
+
+.about-wrapper {
+    width: 90%;
+    margin: 70px auto;
+}
+
+.about-row {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+}
+
+.about-card {
+    background: #F3C8DD;
+    border-radius: 20px;
+    width: 48%;
+    min-width: 330px;
+    height: auto;
+    display: flex;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.18);
+}
+
+.about-text {
+    padding: 30px;
+    width: 65%;
+}
+
+.about-title {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.about-desc {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.about-more {
+    display: inline-block;
+    margin-top: 12px;
+    color: #3A345B;
+    text-decoration: underline;
+    font-weight: bold;
+    padding: 0;
+}
+
+.about-image {
+    width: 35%;
+}
+
+.about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* -------------------- */
+
+.feature-section {
+    width: 90%;
+    margin: 80px auto 60px;
+    text-align: center;
+}
+
+.feature-title {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.feature-row {
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    flex-wrap: wrap;
+}
+
+.feature-card {
+    background: #F3C8DD;
+    width: 280px;
+    padding: 35px 20px;
+    border-radius: 22px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.22);
+}
+
+.feature-icon {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 15px;
+}
+
+.feature-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+    background: transparent;
+    mix-blend-mode: darken; /* opsional: hilangin pinggiran putih */
+}
+
+
+.feature-card-title {
+    font-size: 20px;
+    color: #3A345B;
+    font-style: italic;
+}
+
+/* FOOTER */
+.footer {
+    background-color: #3A345B;
+    color: #F3C8DD;
+    padding: 40px 0;
+    margin-top: 50px;
+    font-family: "Times New Roman", serif;
+    font-style: normal;
+}
+
+.footer-content {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-image img {
+    width: 340px;
+    border-radius: 5px;
+}
+
+.footer-column h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #F3C8DD;
+    font-family: "Vollkorn", serif;
+    font-style: italic;
+}
+
+.footer-column,
+.footer-column a {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #F3C8DD;
+    text-decoration: none;
+}
+
+.footer-column a:hover {
+    text-decoration: underline;
+}
+
+
+/* ========================================================= */
+/*                    NAVBAR STICKY (NEW)                    */
+/* ========================================================= */
+
+/* ================================
+   NAVBAR (DARI KODE 1 - DISAMAKAN)
+=================================*/
+.navbar {
+    width: 100%;
+    background: white;
+    padding: 18px 0;
+    text-align: center;
+    position: relative;
+    transition: all 0.3s ease;
+    box-shadow: 0px 0px 0px rgba(0,0,0,0);
+    z-index: 999;
+}
+
+.navbar.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #F3C8DD;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+}
+
+/* FONT DI SAMAKAN: Vollkorn Italic */
+.menu a,
+.dropbtn {
+    margin: 0 12px;
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #3A345B;
+    cursor: pointer;
+    font-family: "Vollkorn", serif !important;
+    font-style: italic !important;
+}
+
+/* Hover */
+.menu a:hover,
+.dropbtn:hover {
+    text-decoration: underline;
+}
+
+/* Dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 27px;
+    left: 0;
+    background: #F3C8DD;
+    min-width: 180px;
+    padding: 15px 0;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
+    z-index: 1000;
+}
+
+/* FONT SUBMENU → NORMAL, TETAP VOLLKORN ITALIC */
+.dropdown-content a {
+    display: block;
+    padding: 10px 18px;
+    text-align: left;
+    color: #3A345B;
+    text-decoration: none;
+    font-weight: normal;
+    font-family: "Vollkorn", serif !important;
+    font-style: italic !important;
+}
+
+.dropdown-content a:hover {
+    background: #f7d7e7;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header-foto">
+  <img src="https://i.pinimg.com/736x/f5/45/77/f5457769241efe88ea0581ade2340fa4.jpg" alt="header">
+</div>
+
+<!-- NAVBAR (REPLACEMENT OF HEADER MENU) -->
+<div class="navbar" id="navbar">
+    <div class="menu">
+
+        <a href="Celyndra Tarot - Home.html">Home</a>
+        <div class="dropdown">
+            <span class="dropbtn">About</span>
+            <div class="dropdown-content">
+                <a href="Celyndra Tarot - About Us.html">About Us</a>
+                <a href="Celyndra Tarot - About Tarot.html">About Tarot</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <span class="dropbtn">Pick a Reading</span>
+            <div class="dropdown-content">
+                <a href="Celyndra Tarot - Heart Message.html">Heart Message</a>
+                <a href="Celyndra Tarot - Soul Mirror.html">Soul Mirror</a>
+                <a href="Celyndra Tarot - Path & Prosperity.html">Path & Prosperity</a>
+            </div>
+        </div>
+
+        <a href="Celyndra Tarot - FAQ.html">FAQ</a>
+        <a href="Celyndra Tarot - More Insight.html">More Insight</a>
+
+    </div>
+</div>
+
+<!-- DAILY TAROT -->
+<div class="home-wrapper">
+
+    <div class="section-title">Preview Tarot Card</div>
+
+    <div class="card-row">
+
+        <!-- FLIP CARD -->
+        <div class="card-container">
+            <div class="card" id="tarotCard">
+                <div class="side front">
+                    <img src="https://i.pinimg.com/736x/ee/fe/0b/eefe0b8d8ecbe334cb519f5edcb0c062.jpg">
+                </div>
+                <div class="side back">
+                    <img src="https://i.pinimg.com/736x/cd/69/50/cd6950f107afd89b6ccb881f03504698.jpg">
+                </div>
+            </div>
+        </div>
+
+        <!-- BUTTON + EXPLANATION -->
+        <div>
+            <a class="btn-explanation" id="btnExplain">See Explanation</a>
+            <a class="btn-hide" id="btnHide" style="display:none;">Hide Explanation</a>
+
+            <div class="explanation-text" id="explanationText">
+                Makna dari kartu ini memiliki luka emosional yang mendalam, kalian sedang berada di fase hidup yang menusuk hati, bisa jadi karena patah hati, dikecewain ekspektasi, intinya lagi kacau banget. 
+                Poin yang ingin disampaikan dari kartu ini adalah "jatuh sakit itu tidak apa-apa, itu berarti kalian sedang di tahap penyembuhan yang nantinya akan kembali ke awal lagi dan lebih baik."
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ===================================== -->
+<!--     ABOUT SECTION (UPDATED)           -->
+<!-- ===================================== -->
+
+<div class="about-wrapper">
+
+    <div class="about-row">
+
+        <!-- ABOUT US -->
+        <div class="about-card">
+            <div class="about-text">
+                <div class="about-title">About Us</div>
+                <div class="about-desc">
+                    Empat mahasiswa Ilmu Perpustakaan yang tertarik pada desain dan media digital. 
+                    Proyek ini dibuat sebagai ruang eksplorasi untuk menghadirkan pengalaman membaca 
+                    tarot yang sederhana, informatif, dan menyenangkan.
+                </div>
+                <a class="about-more" href="Celyndra Tarot - About Us.html">See more</a>
+            </div>
+            <div class="about-image">
+                <img src="https://i.pinimg.com/736x/d7/dc/27/d7dc27285c4cfc5128a9f6757901afab.jpg">
+            </div>
+        </div>
+
+        <!-- ABOUT TAROT -->
+        <div class="about-card">
+            <div class="about-text">
+                <div class="about-title">About Tarot</div>
+                <div class="about-desc">
+                    Tarot telah ada sejak abad ke-15, berkembang dari permainan kartu menjadi alat 
+                    pembacaan makna hidup. Terdiri dari 78 kartu, tarot digunakan untuk ramalan, 
+                    refleksi diri, meditasi, hingga koleksi seni.
+                </div>
+                <a class="about-more" href="Celyndra Tarot - About Tarot.html">See more</a>
+            </div>
+            <div class="about-image">
+                <img src="https://i.pinimg.com/736x/65/28/82/652882f28a6ec52a62e483d148376f03.jpg">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- FEATURE CARDS -->
+<div class="feature-section">
+    <div class="feature-title">Pick a Reading</div>
+
+    <div class="feature-row">
+
+        <!-- HEART MESSAGE -->
+        <div class="feature-card" onclick="window.location.href='Celyndra Tarot - Heart Message.html'">
+            <div class="feature-icon">
+                <img src="love2.jpg">
+            </div>
+            <div class="feature-card-title">Heart Message</div>
+        </div>
+
+        <!-- SOUL MIRROR -->
+        <div class="feature-card" onclick="window.location.href='Celyndra Tarot - Soul Mirror.html'">
+            <div class="feature-icon">
+                <img src="character2.jpg">
+            </div>
+            <div class="feature-card-title">Soul Mirror</div>
+        </div>
+
+        <!-- PATH & PROSPERITY -->
+        <div class="feature-card" onclick="window.location.href='Celyndra Tarot - Path & Prosperity.html'">
+            <div class="feature-icon">
+                <img src="career2.jpg">
+            </div>
+            <div class="feature-card-title">Path & Prosperity</div>
+        </div>
+
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-content">
+
+        <div class="footer-image">
+            <img src="https://i.pinimg.com/736x/11/c0/33/11c0338534b976e89de916808d1da7b2.jpg">
+        </div>
+
+        <div class="footer-column">
+            <h3>Featured Link</h3>
+            <a href="Celyndra Tarot - Home.html">Home</a><br>
+            <a href="Celyndra Tarot - About Us.html">About Us</a><br>
+            <a href="Celyndra Tarot - About Tarot.html">About Tarot</a><br>
+            <a href="Celyndra Tarot - FAQ.html">FAQ</a><br>
+            <a href="Celyndra Tarot - More Insight.html">More Insight</a>
+        </div>
+
+        <div class="footer-column">
+            <h3>Contact Us</h3>
+            Fakultas Ilmu Pengetahuan Budaya<br>
+            Universitas Indonesia<br>
+            Jl. Prof. DR. Selo Soemardjan, Depok, Jawa Barat<br /><br />
+            <a href="mailto:4minionsilpus@gmail.com">4minionsilpus@gmail.com</a>
+        </div>
+
+    </div>
+</footer>
+
+
+<!-- TAROT FLIP SCRIPT (ASLI, TIDAK DIUBAH) -->
+<script>
+const tarotCard = document.getElementById("tarotCard");
+const btnExplain = document.getElementById("btnExplain");
+const btnHide = document.getElementById("btnHide");
+const explanationText = document.getElementById("explanationText");
+
+btnExplain.addEventListener("click", () => {
+    tarotCard.classList.add("flip");
+    explanationText.style.display = "block";
+    btnExplain.style.display = "none";
+    btnHide.style.display = "inline-block";
+});
+
+btnHide.addEventListener("click", () => {
+    tarotCard.classList.remove("flip");
+    explanationText.style.display = "none";
+    btnHide.style.display = "none";
+    btnExplain.style.display = "inline-block";
+});
+</script>
+
+<!-- STICKY NAVBAR SCRIPT -->
+<script>
+const navbar = document.getElementById("navbar");
+const headerImage = document.querySelector(".header-foto");
+
+window.addEventListener("scroll", () => {
+    let headerHeight = headerImage.offsetHeight;
+
+    if (window.scrollY >= headerHeight) {
+        navbar.classList.add("sticky");
+    } else {
+        navbar.classList.remove("sticky");
+    }
+});
+</script>
+
+</body>
+</html>
