@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tarot Card Selection - Heart Message</title>
+
+<!-- IMPORT FONT Vollkorn Italic (agar sama dengan kode pertama) -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@1,400;1,600&display=swap');
+
+    body {
+        background: white;
+        font-family: "Vollkorn", serif;
+        font-style: italic;
+        margin: 0;
+        padding: 0;
+        color: #3A345B;
+    }
+
+    /* ================================
+       HEADER IMAGE (DARI KODE 1)
+    =================================*/
+    .header-image {
+        width: 100%;
+        height: 300px;
+        overflow: hidden;
+    }
+
+    .header-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+    }
+
+    /* ================================
+       NAVBAR (DARI KODE 1)
+    =================================*/
+    .navbar {
+        width: 100%;
+        background: white;
+        padding: 18px 0;
+        text-align: center;
+        position: relative;
+        transition: all 0.3s ease;
+        box-shadow: 0px 0px 0px rgba(0,0,0,0);
+        z-index: 999;
+    }
+
+    .navbar.sticky {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: #F3C8DD;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    }
+
+    .menu a, .dropbtn {
+        margin: 0 12px;
+        font-size: 16px;
+        text-decoration: none;
+        font-weight: bold;
+        color: #3A345B;
+        cursor: pointer;
+    }
+
+    .menu a:hover { text-decoration: underline; }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        top: 27px;
+        left: 0;
+        background: #F3C8DD;
+        min-width: 180px;
+        padding: 15px 0;
+        border-radius: 12px;
+        box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
+        z-index: 1000;
+    }
+
+    .dropdown-content a {
+        display: block;
+        padding: 10px 18px;
+        text-align: left;
+        color: #3A345B;
+        text-decoration: none;
+        font-weight: normal;
+    }
+
+    .dropdown-content a:hover { background: #f7d7e7; }
+    .dropdown:hover .dropdown-content { display: block; }
+
+    /* =======================================
+       ORIGINAL CSS KODE KEDUA (TANPA DIUBAH)
+    ========================================*/
+    .cards-wrapper {
+        width: 90%;
+        margin: 40px auto;
+        text-align: center;
+    }
+
+    .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 25px;
+        justify-items: center;
+        margin-bottom: 30px;
+
+        padding: 0 30px;
+        box-sizing: border-box;
+    }
+
+    .card-container {
+        width: 180px;
+        height: 255px;
+        perspective: 1000px;
+    }
+
+    .card {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 0.6s;
+        cursor: pointer;
+    }
+
+    .card.flip {
+        transform: rotateY(180deg);
+        cursor: default;
+    }
+
+    .side {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .side img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .back { transform: rotateY(180deg); }
+
+    .btn-explanation {
+        padding: 12px 20px;
+        background: #F3C8DD;
+        border-radius: 10px;
+        text-decoration: none;
+        color: #3A345B;
+        font-weight: bold;
+        cursor: pointer;
+        border: none;
+    }
+
+    .btn-explanation:hover { opacity: 0.9; }
+
+    .explanation-box {
+        display: none;
+        margin-top: 20px;
+        font-size: 17px;
+        max-width: 700px;
+        line-height: 1.6;
+        text-align: center;
+        color: #3A345B;
+        margin: 0 auto;
+        font-style: normal;
+    }
+
+    #tryAgainBtn {
+        font-family: "Vollkorn", serif !important;
+        font-style: italic !important;
+    }
+
+    /* RESPONSIVE DARI KODE 2 */
+    @media (max-width: 1024px) {
+        .cards-grid {
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 22px;
+        }
+        .card-container {
+            width: 160px;
+            height: calc(160px * 1.42);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .cards-grid {
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 18px;
+        }
+
+        .card-container {
+            width: 140px;
+            height: calc(140px * 1.42);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .cards-grid {
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 14px;
+        }
+
+        .card-container {
+            width: 120px;
+            height: calc(120px * 1.42);
+        }
+    }
+
+    .footer {
+        background-color: #3A345B;
+        color: #F3C8DD;
+        padding: 40px 0;
+        margin-top: 60px;
+        font-family: "Times New Roman", serif;
+        font-style: normal;
+    }
+
+    .footer-content {
+        width: 90%;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .footer-image img {
+        width: 340px;
+        border-radius: 5px;
+    }
+
+    .footer-column,
+    .footer-column a {
+        font-size: 16px;
+        color: #F3C8DD;
+        text-decoration: none;
+        line-height: 1.5;
+    }
+
+    .footer-column h3 {
+        font-size: 20px;
+        margin-bottom: 10px;
+        font-weight: 600;
+        font-family: "Vollkorn", serif;
+        font-style: italic;
+        color: #F3C8DD;
+    }
+
+</style>
+</head>
+
+<body>
+
+<div class="header-image">
+    <img src="https://i.pinimg.com/736x/f5/45/77/f5457769241efe88ea0581ade2340fa4.jpg">
+</div>
+
+<div class="navbar" id="navbar">
+    <div class="menu">
+        <a href="Celyndra Tarot - Home.html">Home</a>
+        <div class="dropdown">
+            <a class="dropbtn">About</a>
+            <div class="dropdown-content">
+                <a href="Celyndra Tarot - About Tarot.html">About Tarot</a>
+                <a href="Celyndra Tarot - About Us.html">About Us</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <a class="dropbtn">Pick A Reading</a>
+            <div class="dropdown-content">
+                <a href="Celyndra Tarot - Heart Message.html">Heart Message</a>
+                <a href="Celyndra Tarot - Soul Mirror.html">Soul Mirror</a>
+                <a href="Celyndra Tarot - Path & Prosperity.html">Path & Prosperity</a>
+            </div>
+        </div>
+
+        <a href="Celyndra Tarot - FAQ.html">FAQ</a>
+        <a href="">More Insight</a>
+    </div>
+</div>
+
+<!-- =============================
+           KARTU TAROT
+============================== -->
+<div class="cards-wrapper">
+
+    <div class="cards-grid" id="cardsGrid"></div>
+
+    <a class="btn-explanation" id="btnExplain">See Explanation</a>
+
+    <div class="explanation-box" id="explanationBox"></div>
+</div>
+
+<footer class="footer">
+    <div class="footer-content">
+
+        <div class="footer-image">
+            <img src="https://i.pinimg.com/736x/11/c0/33/11c0338534b976e89de916808d1da7b2.jpg" />
+        </div>
+
+        <div class="footer-column">
+            <h3>Featured Link</h3>
+            <a href="Celyndra Tarot - Home.html">Home</a><br />
+            <a href="Celyndra Tarot - About Us.html">About Us</a><br />
+            <a href="Celyndra Tarot - About Tarot.html">About Tarot</a><br />
+            <a href="Celyndra Tarot - FAQ.html">FAQ</a><br />
+            <a href="">More Insight</a>
+        </div>
+
+        <div class="footer-column">
+            <h3>Contact Us</h3>
+            Fakultas Ilmu Pengetahuan Budaya<br>
+            Universitas Indonesia<br>
+            Jl. Prof. DR. Selo Soemardjan, Depok, Jawa Barat<br /><br />
+            <a href="mailto:4minionsilpus@gmail.com">4minionsilpus@gmail.com</a>
+        </div>
+
+    </div>
+</footer>
+
+<!-- =============================
+      JAVASCRIPT KARTU TAROT
+============================== -->
+<script>
+const frontImage = "https://i.pinimg.com/736x/ee/fe/0b/eefe0b8d8ecbe334cb519f5edcb0c062.jpg";
+
+let backs = [
+    "https://i.pinimg.com/736x/6f/85/75/6f8575ffd31dde18f94657c26995f1e0.jpg",
+    "https://i.pinimg.com/736x/01/1f/6e/011f6e1603731844ab59600f2781b01e.jpg",
+    "https://i.pinimg.com/736x/ee/0f/d8/ee0fd8fed3020606a0d11988073c91a5.jpg",
+    "https://i.pinimg.com/736x/4b/36/83/4b3683833dfd545f0d0bfc76da20492e.jpg",
+    "https://i.pinimg.com/736x/16/c6/c5/16c6c5e4e1eb6328e5fd6157f594c9f0.jpg",
+    "https://i.pinimg.com/736x/23/e3/ad/23e3ad6f887fb949df1c534ad5c6b798.jpg",
+    "https://i.pinimg.com/736x/7f/84/3c/7f843cb4ad7dbb686675598aaf2a0ae6.jpg",
+    "https://i.pinimg.com/736x/60/6c/79/606c79ed9880f045409f02504733df12.jpg",
+    "https://i.pinimg.com/736x/e6/b4/a1/e6b4a1b6efaf79784689f95f7b11f020.jpg",
+    "https://i.pinimg.com/736x/9e/4e/af/9e4eaf413d2e00124fd1e868c88c3132.jpg"
+];
+
+const meanings = [
+  "Pasangan kamu sangat dewasa dan matang dalam berhubungan. Jika cocok, kamu ikut jadi lebih jujur, terbuka, dan berkembang bareng tanpa overthinking karena dia jelas dengan tujuannya. Jika tidak cocok, kamu yang belum siap berkomitmen sehingga hubungan cepat berakhir.",
+    "Pasangan kamu berjiwa pemimpin, cukup dominan dan protektif hingga kadang terasa mengontrol. Jika cocok, kamu merasa aman, stabil, dan bisa mengandalkannya. Jika tidak, sikapnya justru membuatmu merasa terkekang dan tidak bebas.",
+    "Pasangan kamu lembut, hangat, dan penuh kasih, membuat kamu merasa dicintai dan punya “rumah” untuk pulang. Jika kamu menghargai hubungan stabil, kalian cocok. Tapi kalau kamu gengsi menunjukkan kasih sayang, pasangan bisa lelah dan memilih pergi.",
+    "Pasangan kamu punya perasaan kuat dan karisma yang bikin kamu klepek-klepek, tapi hubungan cenderung naik turun. Jika cocok, dia bikin emosi kamu lebih stabil. Jika tidak, kamu justru jadi insecure dan mudah labil.",
+    "Pasangan kamu sangat cocok denganmu, tulus, terbuka, dan hangat. Jika cocok, hubungan terasa lancar dan jelas. Jika tidak, kamu bisa merasa kurang diprioritaskan dan hubungan jadi tidak stabil.",
+    "Pasangan kamu karismatik dan mudah dicintai, membuat hubungan terasa hidup tapi juga menantang. Jika cocok, kamu ikut berkembang bersamanya. Jika tidak, kamu bisa merasa terkekang karena sikapnya yang manipulatif dan cenderung love-bombing.",
+    "Pasangan kamu orangnya spontan, ringan, dan ingin selalu tahu tentang kamu. Kalau kamu suka hubungan santai dan simpel, kalian cocok karena dia bikin kamu nyaman dan lebih open-minded. Tapi kalau tidak, hubungan terasa nggak jelas, bikin kamu insecure dan merasa berjalan sendirian.",
+    "Pasangan kamu itu kalem, sabar, dan stabil secara emosi, sehingga hubungan terasa healing. Jika kamu suka hubungan stabil, kalian cocok; tapi kalau kamu mudah emosi dan merasa hubungan terlalu lambat, berarti kurang cocok.",
+    "Pasangan kamu punya mental pejuang, tegas, dan selalu berjuang untuk hubungan. Jika kamu suka pasangan yang kuat pendirian dan mau maju bareng, kalian cocok banget. Tapi kalau kamu nggak nyaman jadi pihak yang lebih submisif dan lebih suka hubungan yang slowburn, kamu bakal cepat merasa capek dan nggak cocok sama dia.",
+    "Pasangan kamu datang seperti badai dan bikin hidup kamu chaos. Hubungannya berat sebelah dan super toxic. Positifnya, kamu jadi sadar kalau kamu layak dihargai, jadi tinggalkan saja. Negatifnya, jelas: hubungan ini penuh keburukan dan tidak sehat."
+];
+
+const cardsGrid = document.getElementById("cardsGrid");
+let chosen = 0;
+
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+function renderCards() {
+    cardsGrid.innerHTML = "";
+    chosen = 0;
+
+    backs.forEach((backImg, index) => {
+        const container = document.createElement("div");
+        container.className = "card-container";
+
+        container.innerHTML = `
+            <div class="card" data-index="${index}">
+                <div class="side front"><img src="${frontImage}" /></div>
+                <div class="side back"><img src="${backImg}" /></div>
+            </div>
+        `;
+        cardsGrid.appendChild(container);
+    });
+
+    const cards = document.querySelectorAll(".card");
+    cards.forEach(card => {
+        card.addEventListener("click", () => {
+            if (card.classList.contains("flip")) return;
+            if (chosen >= 3) return;
+
+            card.classList.add("flip");
+            chosen++;
+        });
+    });
+}
+
+renderCards();
+
+const btnExplain = document.getElementById("btnExplain");
+const explanationBox = document.getElementById("explanationBox");
+
+btnExplain.addEventListener("click", () => {
+    btnExplain.style.display = "none";
+    explanationBox.style.display = "block";
+
+    const flipped = document.querySelectorAll(".card.flip");
+
+    let text = "";
+    flipped.forEach(card => {
+        const idx = card.getAttribute("data-index");
+        text += `• ${meanings[idx]}<br><br>`;
+    });
+
+    explanationBox.innerHTML =
+        (text || "Belum ada kartu yang dipilih.") +
+        `<br><button id="tryAgainBtn" class="btn-explanation" style="margin-top:20px;">Try Again</button>`;
+
+    document.getElementById("tryAgainBtn").addEventListener("click", () => {
+        shuffle(backs);
+        renderCards();
+        explanationBox.style.display = "none";
+        btnExplain.style.display = "inline-block";
+    });
+});
+</script>
+
+<!-- STICKY NAVBAR SCRIPT -->
+<script>
+const navbar = document.getElementById("navbar");
+const headerImage = document.querySelector(".header-image");
+
+window.addEventListener("scroll", () => {
+    let headerHeight = headerImage.offsetHeight;
+
+    if (window.scrollY >= headerHeight) {
+        navbar.classList.add("sticky");
+    } else {
+        navbar.classList.remove("sticky");
+    }
+});
+</script>
+
+</body>
+</html>
